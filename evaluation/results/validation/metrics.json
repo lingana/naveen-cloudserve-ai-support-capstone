@@ -1,0 +1,115 @@
+{
+  "volume": {
+    "tickets_processed": 80,
+    "answered": 0,
+    "escalated": 80,
+    "blocked": 0
+  },
+  "business": {
+    "escalation_rate": 1.0,
+    "first_contact_resolution_proxy": 0.0,
+    "mean_response_time_seconds": 0.0151,
+    "median_response_time_seconds": 0.0147
+  },
+  "technical": {
+    "classification": {
+      "billing_query": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "api_key_issue": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "unclear_request": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "rollback_request": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "data_residency": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "deployment_failure": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "api_usage_question": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "account_access": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "onboarding": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "security_incident": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "authentication_failure": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "performance_degradation": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "feature_request": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "webhook_issue": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "configuration_help": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "integration_help": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "quota_or_overage": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "compliance_request": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "data_export": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "rate_limit": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "sso_configuration": {
+        "precision": 1.0,
+        "recall": 1.0
+      },
+      "database_issue": {
+        "precision": 1.0,
+        "recall": 1.0
+      }
+    },
+    "latency_median_seconds": 0.0147,
+    "latency_p95_seconds": 0.0201,
+    "retrieval_hits": 69,
+    "retrieval_hit_rate": 0.8625
+  },
+  "governance": {
+    "decision_log_records": 164,
+    "guardrail_activations": {},
+    "private_data_detections": 0
+  }
+}
