@@ -14,24 +14,12 @@
       {
         "doc_id": "DOC-AUTH-004",
         "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.2626893939393939
-      },
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.22900641025641025
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.20354785478547854
+        "text": "1. Check the API keys page for the key's status and expiry. Revoked and expired keys are listed with the date and the user who acted.\n2. Review the scopes attached to the key. Read-only keys cannot write, and project-scoped keys cannot reach organisation endpoints.\n3. To rotate without downtime, create the replacement key first, deploy it, confirm traffic has moved, then revoke the old key.\n4. If a key has been exposed publicly, revoke it immediately rather than waiting for the rotation window.\n",
+        "score": 0.19055160147168956
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.010786099941469729
+    "latency_seconds": 0.011580000049434602
   },
   {
     "ticket_id": "VAL-0002",
@@ -44,22 +32,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Ticket is marked must-not-auto-respond",
-    "sources": [
-      {
-        "doc_id": "DOC-SEC-002",
-        "title": "Handling exposed secrets and credential rotation",
-        "text": "# Handling exposed secrets and credential rotation\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A key has been committed to a repository\n- A secret appears in application logs\n- A third party has reported finding a credential\n\n## Common causes\n\n- Configuration was committed rather than referenced from the environment\n- The application prints its configuration during startup\n- A key was shared in a support ticket or a chat message\n\n## Resolution\n\n1. Revoke the exposed credential first. Removing it ",
-        "score": 0.22659340659340663
-      },
-      {
-        "doc_id": "DOC-API-002",
-        "title": "Pagination and handling large result sets",
-        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n- Iterating through results misses or duplicates records\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n- Offset pagination was used against a changing collection\n- The page size requested exceeds the maximum\n\n## Resolution\n\n1. Use cursor pagination for anything that may change while you iterate. ",
-        "score": 0.22582524271844662
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.012348100077360868
+    "latency_seconds": 0.008479899959638715
   },
   {
     "ticket_id": "VAL-0003",
@@ -74,7 +49,7 @@
     "reason": "Ticket is marked must-not-auto-respond",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.008973199990577996
+    "latency_seconds": 0.011011200025677681
   },
   {
     "ticket_id": "VAL-0004",
@@ -91,12 +66,12 @@
       {
         "doc_id": "DOC-AUTH-002",
         "title": "Multi-factor authentication setup and recovery",
-        "text": "# Multi-factor authentication setup and recovery\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The authenticator code is rejected as invalid\n- A user has lost the device holding their authenticator\n- Recovery codes were never downloaded\n\n## Common causes\n\n- Device clock drift of more than thirty seconds invalidates time-based codes\n- The authenticator was enrolled against a different account\n- Recovery codes were regenerated, invalidating the older set\n\n## Resolution\n\n1. Ask the user to check that ",
-        "score": 0.2565789473684211
+        "text": "# Multi-factor authentication setup and recovery\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The authenticator code is rejected as invalid\n\n- A user has lost the device holding their authenticator\n\n- Recovery codes were never downloaded\n\n## Common causes\n\n- Device clock drift of more than thirty seconds invalidates time-based codes\n\n- The authenticator was enrolled against a different account\n\n- Recovery codes were regenerated, invalidating the older set\n\n## Resolution",
+        "score": 0.2517970303489747
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.011495099985040724
+    "latency_seconds": 0.011190199991688132
   },
   {
     "ticket_id": "VAL-0005",
@@ -113,12 +88,12 @@
       {
         "doc_id": "DOC-API-002",
         "title": "Pagination and handling large result sets",
-        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n- Iterating through results misses or duplicates records\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n- Offset pagination was used against a changing collection\n- The page size requested exceeds the maximum\n\n## Resolution\n\n1. Use cursor pagination for anything that may change while you iterate. ",
-        "score": 0.4022435897435898
+        "text": "1. Use cursor pagination for anything that may change while you iterate. Offset pagination will skip or repeat records when items are inserted mid-iteration.\n2. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null.\n3. Keep page size at or below two hundred. Larger requests are rejected rather than truncated.\n4. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link.\n\n## Notes\n\nCur",
+        "score": 0.2271414766912037
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.011085800011642277
+    "latency_seconds": 0.009718200075440109
   },
   {
     "ticket_id": "VAL-0006",
@@ -130,10 +105,17 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "No relevant documentation passage was retrieved",
-    "sources": [],
+    "reason": "Confidence 0.38 is below threshold 0.80",
+    "sources": [
+      {
+        "doc_id": "DOC-AUTH-001",
+        "title": "Resolving invalid credential errors on login",
+        "text": "# Resolving invalid credential errors on login\n\n**Applies to:** Console, CLI, SDK\n\n## Symptoms\n\n- The console returns 'Invalid credentials' despite a correct password\n\n- Login succeeds in one browser but fails in another\n\n- The CLI reports authentication failure after a working period\n\n## Common causes\n\n- The account is locked after five consecutive failed attempts\n\n- A stale session cookie is being sent alongside new credentials\n\n- The password was changed in another session and the client cach",
+        "score": 0.2152841169778914
+      }
+    ],
     "guardrails": [],
-    "latency_seconds": 0.009292000089772046
+    "latency_seconds": 0.012092999997548759
   },
   {
     "ticket_id": "VAL-0007",
@@ -148,7 +130,7 @@
     "reason": "Ticket is marked must-not-auto-respond",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.015005299937911332
+    "latency_seconds": 0.011255199904553592
   },
   {
     "ticket_id": "VAL-0008",
@@ -165,12 +147,18 @@
       {
         "doc_id": "DOC-ACCT-001",
         "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.2964882943143813
+        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n\n- A departing user needs removing\n\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n\n- The invitation was never accepted and the account does not exist\n\n- A group membership grants broader access than the direct role suggests\n\n## Resolution",
+        "score": 0.3060407305950925
+      },
+      {
+        "doc_id": "DOC-ACCT-001",
+        "title": "Managing team members, roles and permissions",
+        "text": "1. Check the effective permissions view for the user, which resolves direct roles and group memberships together.\n2. Confirm the invitation was accepted. Pending invitations appear in a separate section and expire after seven days.\n3. Remove a departing user rather than only changing their password, and revoke any API keys they created.\n4. Prefer group membership to direct role assignment, so that access can be reviewed in one place.\n\n## Notes\n\nRemoving the last account owner is not permitted. T",
+        "score": 0.27261881962082046
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01165140001103282
+    "latency_seconds": 0.008944900007918477
   },
   {
     "ticket_id": "VAL-0009",
@@ -187,18 +175,18 @@
       {
         "doc_id": "DOC-SEC-003",
         "title": "Audit logging and compliance evidence",
-        "text": "# Audit logging and compliance evidence\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- An auditor has requested access records\n- An event that should be logged cannot be found\n- Log retention is shorter than a policy requires\n\n## Common causes\n\n- The event predates the retention window\n- The event type is not covered by the audit log\n- The organisation is on a plan with shorter retention\n\n## Resolution\n\n1. Filter the audit log by actor, resource and date range. Every administrati",
-        "score": 0.35051470588235295
+        "text": "1. Filter the audit log by actor, resource and date range. Every administrative action carries the user, the address and the outcome.\n2. Export the relevant period to object storage for anything needed beyond the retention window. Exports are not subject to retention limits.\n3. Configure continuous export to your own storage if a policy requires retention longer than the plan provides.\n4. Note that read access to resources is not logged on Business plans, only administrative and configuration ch",
+        "score": 0.2261644618296254
       },
       {
-        "doc_id": "DOC-SEC-001",
-        "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.1861607142857143
+        "doc_id": "DOC-SEC-003",
+        "title": "Audit logging and compliance evidence",
+        "text": "# Audit logging and compliance evidence\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- An auditor has requested access records\n\n- An event that should be logged cannot be found\n\n- Log retention is shorter than a policy requires\n\n## Common causes\n\n- The event predates the retention window\n\n- The event type is not covered by the audit log\n\n- The organisation is on a plan with shorter retention\n\n## Resolution",
+        "score": 0.210379657281189
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.013610300025902689
+    "latency_seconds": 0.008709999965503812
   },
   {
     "ticket_id": "VAL-0010",
@@ -211,9 +199,16 @@
     "escalated": true,
     "blocked": false,
     "reason": "Intent billing_query requires human handling",
-    "sources": [],
+    "sources": [
+      {
+        "doc_id": "DOC-BILL-001",
+        "title": "Understanding your invoice and usage breakdown",
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.259371946583977
+      }
+    ],
     "guardrails": [],
-    "latency_seconds": 0.0172678999369964
+    "latency_seconds": 0.011376900016330183
   },
   {
     "ticket_id": "VAL-0011",
@@ -225,10 +220,17 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "No relevant documentation passage was retrieved",
-    "sources": [],
+    "reason": "Confidence 0.67 is below threshold 0.80",
+    "sources": [
+      {
+        "doc_id": "DOC-DEPLOY-002",
+        "title": "Rolling back a failed release",
+        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within ro",
+        "score": 0.19081442373081947
+      }
+    ],
     "guardrails": [],
-    "latency_seconds": 0.01471250003669411
+    "latency_seconds": 0.010616800049319863
   },
   {
     "ticket_id": "VAL-0012",
@@ -245,12 +247,12 @@
       {
         "doc_id": "DOC-DEPLOY-002",
         "title": "Rolling back a failed release",
-        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within roug",
-        "score": 0.20903890160183067
+        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within ro",
+        "score": 0.30812040962599946
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.014107999973930418
+    "latency_seconds": 0.007757600047625601
   },
   {
     "ticket_id": "VAL-0013",
@@ -265,26 +267,14 @@
     "reason": "Intent billing_query requires human handling",
     "sources": [
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.27591564927857937
-      },
-      {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.25915775401069524
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.2406267179769104
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.29005564505293135
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01459979999344796
+    "latency_seconds": 0.01390050002373755
   },
   {
     "ticket_id": "VAL-0014",
@@ -299,7 +289,7 @@
     "reason": "No relevant documentation passage was retrieved",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.013150200014933944
+    "latency_seconds": 0.007949699996970594
   },
   {
     "ticket_id": "VAL-0015",
@@ -314,7 +304,7 @@
     "reason": "Ticket is marked must-not-auto-respond",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.012696300051175058
+    "latency_seconds": 0.013017699937336147
   },
   {
     "ticket_id": "VAL-0016",
@@ -326,23 +316,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.31 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.23714285714285716
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.19420374707259955
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.012062699999660254
+    "latency_seconds": 0.011652199900709093
   },
   {
     "ticket_id": "VAL-0017",
@@ -355,28 +332,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Ticket is marked must-not-auto-respond",
-    "sources": [
-      {
-        "doc_id": "DOC-SEC-002",
-        "title": "Handling exposed secrets and credential rotation",
-        "text": "# Handling exposed secrets and credential rotation\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A key has been committed to a repository\n- A secret appears in application logs\n- A third party has reported finding a credential\n\n## Common causes\n\n- Configuration was committed rather than referenced from the environment\n- The application prints its configuration during startup\n- A key was shared in a support ticket or a chat message\n\n## Resolution\n\n1. Revoke the exposed credential first. Removing it ",
-        "score": 0.22659340659340663
-      },
-      {
-        "doc_id": "DOC-SEC-001",
-        "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.2261855670103093
-      },
-      {
-        "doc_id": "DOC-AUTH-004",
-        "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.2260606060606061
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.010975499986670911
+    "latency_seconds": 0.008854400017298758
   },
   {
     "ticket_id": "VAL-0018",
@@ -393,12 +351,18 @@
       {
         "doc_id": "DOC-API-002",
         "title": "Pagination and handling large result sets",
-        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n- Iterating through results misses or duplicates records\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n- Offset pagination was used against a changing collection\n- The page size requested exceeds the maximum\n\n## Resolution\n\n1. Use cursor pagination for anything that may change while you iterate. ",
-        "score": 0.4550641025641026
+        "text": "1. Use cursor pagination for anything that may change while you iterate. Offset pagination will skip or repeat records when items are inserted mid-iteration.\n2. Pass the next_cursor value from each response as the cursor parameter of the following request, and stop when it is null.\n3. Keep page size at or below two hundred. Larger requests are rejected rather than truncated.\n4. For very large extracts, use the export endpoint, which runs asynchronously and returns a download link.\n\n## Notes\n\nCur",
+        "score": 0.223708757714576
+      },
+      {
+        "doc_id": "DOC-API-002",
+        "title": "Pagination and handling large result sets",
+        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n\n- Iterating through results misses or duplicates records\n\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n\n- Offset pagination was used against a changing collection\n\n- The page size requested exceeds the maximum\n\n## Resolution",
+        "score": 0.20493160375427902
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.011628799955360591
+    "latency_seconds": 0.012179899960756302
   },
   {
     "ticket_id": "VAL-0019",
@@ -410,17 +374,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.30 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.2491489361702128
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.014351199963130057
+    "latency_seconds": 0.011949199950322509
   },
   {
     "ticket_id": "VAL-0020",
@@ -433,40 +390,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Ticket is marked must-not-auto-respond",
-    "sources": [
-      {
-        "doc_id": "DOC-ONB-002",
-        "title": "Migrating an existing application to CloudServe",
-        "text": "# Migrating an existing application to CloudServe\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An existing application needs moving with minimal downtime\n- The application depends on services not yet available\n\n## Common causes\n\n- Configuration is embedded in the application rather than externalised\n- The application depends on local state that will not survive scaling\n\n## Resolution\n\n1. Externalise configuration before migrating. Anything read from a file on disk should move to environment variab",
-        "score": 0.3406896551724138
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.2998168498168498
-      },
-      {
-        "doc_id": "DOC-API-003",
-        "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.2978964401294498
-      },
-      {
-        "doc_id": "DOC-AUTH-004",
-        "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.29748427672955974
-      },
-      {
-        "doc_id": "DOC-ONB-001",
-        "title": "First deployment: a walkthrough",
-        "text": "# First deployment: a walkthrough\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A new user does not know where to begin\n- The first deployment fails for unclear reasons\n\n## Common causes\n\n- Required configuration has not been set\n- The project structure does not match what the build expects\n\n## Resolution\n\n1. Create a project, then a service within it. Resources belong to services and services belong to projects.\n2. Connect a repository or push a container image. The build service detects common pr",
-        "score": 0.26045977011494253
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.013456200016662478
+    "latency_seconds": 0.013788699987344444
   },
   {
     "ticket_id": "VAL-0021",
@@ -481,7 +407,7 @@
     "reason": "No relevant documentation passage was retrieved",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.01231080002617091
+    "latency_seconds": 0.015769400051794946
   },
   {
     "ticket_id": "VAL-0022",
@@ -493,23 +419,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.34 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.22849056603773588
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.18821138211382116
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.012571800034493208
+    "latency_seconds": 0.009394300053827465
   },
   {
     "ticket_id": "VAL-0023",
@@ -524,7 +437,7 @@
     "reason": "No relevant documentation passage was retrieved",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.01289879996329546
+    "latency_seconds": 0.017389999935403466
   },
   {
     "ticket_id": "VAL-0024",
@@ -536,17 +449,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.50 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-AUTH-001",
-        "title": "Resolving invalid credential errors on login",
-        "text": "# Resolving invalid credential errors on login\n\n**Applies to:** Console, CLI, SDK\n\n## Symptoms\n\n- The console returns 'Invalid credentials' despite a correct password\n- Login succeeds in one browser but fails in another\n- The CLI reports authentication failure after a working period\n\n## Common causes\n\n- The account is locked after five consecutive failed attempts\n- A stale session cookie is being sent alongside new credentials\n- The password was changed in another session and the client cached t",
-        "score": 0.18480603448275862
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.010730299982242286
+    "latency_seconds": 0.012381099979393184
   },
   {
     "ticket_id": "VAL-0025",
@@ -563,12 +469,18 @@
       {
         "doc_id": "DOC-DEPLOY-001",
         "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.3158333333333333
+        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n\n- Logs show repeated health check timeouts\n\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n\n- The container listens on a different port than the service declares\n\n- A required environment variable is absent in the deployed environment\n\n## ",
+        "score": 0.24259740590779416
+      },
+      {
+        "doc_id": "DOC-DEPLOY-001",
+        "title": "Container deployments failing during the health check phase",
+        "text": "1. Confirm the container is listening on the port declared in the service definition. A mismatch here produces a health check failure that looks like a timeout.\n2. Increase the initial delay if the application needs time to warm up before it can answer. Thirty seconds is a reasonable starting point for services that load models or caches.\n3. Compare the environment variables present in the deployment against those the application requires. Missing configuration frequently causes a silent startup",
+        "score": 0.23199097963827886
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.014040399924851954
+    "latency_seconds": 0.009348600055091083
   },
   {
     "ticket_id": "VAL-0026",
@@ -585,30 +497,12 @@
       {
         "doc_id": "DOC-DATA-003",
         "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.3001356483993489
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.23556539864512768
-      },
-      {
-        "doc_id": "DOC-DATA-002",
-        "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.23544891640866875
-      },
-      {
-        "doc_id": "DOC-AUTH-003",
-        "title": "Single sign-on configuration with SAML providers",
-        "text": "# Single sign-on configuration with SAML providers\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Users are redirected to the identity provider and returned to an error page\n- SSO works for some users and not others\n- New users are not provisioned automatically\n\n## Common causes\n\n- The assertion consumer service URL does not match the value registered with CloudServe\n- The email attribute in the assertion does not match the CloudServe account email\n- Just-in-time provisioning is ",
-        "score": 0.22172248803827754
+        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n\n- Latency is high for users far from the primary region\n\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n\n- Read traffic is being served from the primary region only\n\n- Backups are replicated to a second region by default\n\n## Resolution",
+        "score": 0.28811342053102534
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.014746099943295121
+    "latency_seconds": 0.01365590002387762
   },
   {
     "ticket_id": "VAL-0027",
@@ -625,18 +519,18 @@
       {
         "doc_id": "DOC-BILL-003",
         "title": "Usage limits, overage and spend controls",
-        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n- Overage charges appeared unexpectedly\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n- A spend cap was configured and reached\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution\n\n1. Check the current period usage against the plan allowance on the billin",
-        "score": 0.2764976958525346
+        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n\n- Overage charges appeared unexpectedly\n\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n\n- A spend cap was configured and reached\n\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution",
+        "score": 0.3974317371642803
       },
       {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.2350985221674877
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.18687860183632743
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.012694599921815097
+    "latency_seconds": 0.011988800019025803
   },
   {
     "ticket_id": "VAL-0028",
@@ -651,38 +545,14 @@
     "reason": "Confidence 0.36 is below threshold 0.80",
     "sources": [
       {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.34717213114754103
-      },
-      {
         "doc_id": "DOC-DEPLOY-003",
         "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.3271261682242991
-      },
-      {
-        "doc_id": "DOC-DEPLOY-004",
-        "title": "Configuring environment variables and secrets",
-        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n- A secret value appears in plain text in the logs\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n- The application logs its configuration at startup\n- An environment override exists that is not visible on the main settings page\n\n## Resolut",
-        "score": 0.32212121212121214
-      },
-      {
-        "doc_id": "DOC-API-003",
-        "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.312311320754717
-      },
-      {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.3110840707964602
+        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n\n- The build works locally but fails in the pipeline\n\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n\n- The build environment uses a different language runtime than the local machine\n\n- The dependency cache holds a partially written artefact\n\n## Resolution",
+        "score": 0.2481415607246847
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018270400003530085
+    "latency_seconds": 0.014408900053240359
   },
   {
     "ticket_id": "VAL-0029",
@@ -694,41 +564,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.52 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.25916666666666666
-      },
-      {
-        "doc_id": "DOC-AUTH-001",
-        "title": "Resolving invalid credential errors on login",
-        "text": "# Resolving invalid credential errors on login\n\n**Applies to:** Console, CLI, SDK\n\n## Symptoms\n\n- The console returns 'Invalid credentials' despite a correct password\n- Login succeeds in one browser but fails in another\n- The CLI reports authentication failure after a working period\n\n## Common causes\n\n- The account is locked after five consecutive failed attempts\n- A stale session cookie is being sent alongside new credentials\n- The password was changed in another session and the client cached t",
-        "score": 0.25701149425287356
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.20895833333333333
-      },
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.19775641025641025
-      },
-      {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.19696969696969696
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.0143018999369815
+    "latency_seconds": 0.008742399979382753
   },
   {
     "ticket_id": "VAL-0030",
@@ -741,40 +580,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Ticket is marked must-not-auto-respond",
-    "sources": [
-      {
-        "doc_id": "DOC-ONB-002",
-        "title": "Migrating an existing application to CloudServe",
-        "text": "# Migrating an existing application to CloudServe\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An existing application needs moving with minimal downtime\n- The application depends on services not yet available\n\n## Common causes\n\n- Configuration is embedded in the application rather than externalised\n- The application depends on local state that will not survive scaling\n\n## Resolution\n\n1. Externalise configuration before migrating. Anything read from a file on disk should move to environment variab",
-        "score": 0.3406896551724138
-      },
-      {
-        "doc_id": "DOC-API-003",
-        "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.3376470588235294
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.2998168498168498
-      },
-      {
-        "doc_id": "DOC-BILL-002",
-        "title": "Changing plans, and how proration is calculated",
-        "text": "# Changing plans, and how proration is calculated\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The charge after an upgrade differs from the advertised price\n- A downgrade did not take effect immediately\n- A credit is expected but not visible\n\n## Common causes\n\n- The upgrade was prorated across the remainder of the billing period\n- Downgrades are applied at the end of the current period rather than immediately\n- The credit was applied to the next invoice rather than refunded\n\n## Resolution\n\n1. Upgr",
-        "score": 0.29929078014184396
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.2989583333333333
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.014805100043304265
+    "latency_seconds": 0.013871199917048216
   },
   {
     "ticket_id": "VAL-0031",
@@ -789,7 +597,7 @@
     "reason": "No relevant documentation passage was retrieved",
     "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.014461400103755295
+    "latency_seconds": 0.007920200005173683
   },
   {
     "ticket_id": "VAL-0032",
@@ -806,30 +614,12 @@
       {
         "doc_id": "DOC-BILL-003",
         "title": "Usage limits, overage and spend controls",
-        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n- Overage charges appeared unexpectedly\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n- A spend cap was configured and reached\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution\n\n1. Check the current period usage against the plan allowance on the billin",
-        "score": 0.26447368421052636
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.24100169779286928
-      },
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.23217580032555618
-      },
-      {
-        "doc_id": "DOC-DATA-002",
-        "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.1916842105263158
+        "text": "1. Check the current period usage against the plan allowance on the billing page.\n2. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate. Production workloads generally need the second.\n3. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning.\n4. Where a cap has stopped a production service, an account owner can raise it immediately from the billing page and service re",
+        "score": 0.20924691740482493
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01011510007083416
+    "latency_seconds": 0.011254900018684566
   },
   {
     "ticket_id": "VAL-0033",
@@ -846,12 +636,18 @@
       {
         "doc_id": "DOC-API-003",
         "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.44929846938775514
+        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n\n- The same event is delivered more than once\n\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n\n- The endpoint responded too slowly and the delivery timed out\n\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution",
+        "score": 0.46511761152144243
+      },
+      {
+        "doc_id": "DOC-API-003",
+        "title": "Webhook delivery, retries and signature verification",
+        "text": "1. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days.\n2. Return 2xx as quickly as possible and process the event asynchronously. Deliveries time out after five seconds.\n3. Compute the signature over the raw request body before any parsing. Re-serialising JSON changes the bytes and invalidates the signature.\n4. Make your handler idempotent using the event identifier. At-least-once delivery means duplicates are expected rather tha",
+        "score": 0.29317877709149825
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.012253899942152202
+    "latency_seconds": 0.01178770000115037
   },
   {
     "ticket_id": "VAL-0034",
@@ -868,12 +664,12 @@
       {
         "doc_id": "DOC-DEPLOY-002",
         "title": "Rolling back a failed release",
-        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within roug",
-        "score": 0.20903890160183067
+        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within ro",
+        "score": 0.30812040962599946
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.009768399992026389
+    "latency_seconds": 0.011042799917049706
   },
   {
     "ticket_id": "VAL-0035",
@@ -886,22 +682,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Ticket is marked must-not-auto-respond",
-    "sources": [
-      {
-        "doc_id": "DOC-SEC-002",
-        "title": "Handling exposed secrets and credential rotation",
-        "text": "# Handling exposed secrets and credential rotation\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A key has been committed to a repository\n- A secret appears in application logs\n- A third party has reported finding a credential\n\n## Common causes\n\n- Configuration was committed rather than referenced from the environment\n- The application prints its configuration during startup\n- A key was shared in a support ticket or a chat message\n\n## Resolution\n\n1. Revoke the exposed credential first. Removing it ",
-        "score": 0.2816666666666667
-      },
-      {
-        "doc_id": "DOC-AUTH-004",
-        "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.2811224489795919
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.010272699990309775
+    "latency_seconds": 0.009641899960115552
   },
   {
     "ticket_id": "VAL-0036",
@@ -913,41 +696,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.58 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.2568336162988115
-      },
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.22778947368421054
-      },
-      {
-        "doc_id": "DOC-AUTH-001",
-        "title": "Resolving invalid credential errors on login",
-        "text": "# Resolving invalid credential errors on login\n\n**Applies to:** Console, CLI, SDK\n\n## Symptoms\n\n- The console returns 'Invalid credentials' despite a correct password\n- Login succeeds in one browser but fails in another\n- The CLI reports authentication failure after a working period\n\n## Common causes\n\n- The account is locked after five consecutive failed attempts\n- A stale session cookie is being sent alongside new credentials\n- The password was changed in another session and the client cached t",
-        "score": 0.22578947368421054
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.19976076555023925
-      },
-      {
-        "doc_id": "DOC-DEPLOY-004",
-        "title": "Configuring environment variables and secrets",
-        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n- A secret value appears in plain text in the logs\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n- The application logs its configuration at startup\n- An environment override exists that is not visible on the main settings page\n\n## Resolut",
-        "score": 0.19593301435406701
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.012735099997371435
+    "latency_seconds": 0.0077121000504121184
   },
   {
     "ticket_id": "VAL-0037",
@@ -964,12 +716,12 @@
       {
         "doc_id": "DOC-DATA-003",
         "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.35649644473173886
+        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n\n- Latency is high for users far from the primary region\n\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n\n- Read traffic is being served from the primary region only\n\n- Backups are replicated to a second region by default\n\n## Resolution",
+        "score": 0.3288812318726729
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.013517599902115762
+    "latency_seconds": 0.011299800011329353
   },
   {
     "ticket_id": "VAL-0038",
@@ -986,24 +738,12 @@
       {
         "doc_id": "DOC-PERF-001",
         "title": "Diagnosing elevated response latency",
-        "text": "# Diagnosing elevated response latency\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- Response times have increased without a code change\n- The 95th percentile is far above the median\n- Latency rises at predictable times of day\n\n## Common causes\n\n- The service is running close to its memory limit and spending time in garbage collection\n- A downstream dependency has slowed and the delay is propagating\n- Instance count is not scaling with the load pattern\n\n## Resolution\n\n1. Compare median a",
-        "score": 0.23213114754098363
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.19843478260869568
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.19716030534351148
+        "text": "# Diagnosing elevated response latency\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- Response times have increased without a code change\n\n- The 95th percentile is far above the median\n\n- Latency rises at predictable times of day\n\n## Common causes\n\n- The service is running close to its memory limit and spending time in garbage collection\n\n- A downstream dependency has slowed and the delay is propagating\n\n- Instance count is not scaling with the load pattern\n\n## Resolution",
+        "score": 0.2992573219896187
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.017926099942997098
+    "latency_seconds": 0.010199900018051267
   },
   {
     "ticket_id": "VAL-0039",
@@ -1018,26 +758,14 @@
     "reason": "Confidence 0.57 is below threshold 0.80",
     "sources": [
       {
-        "doc_id": "DOC-SEC-001",
-        "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.21212616822429908
-      },
-      {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.1976923076923077
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.18958661417322836
+        "doc_id": "DOC-AUTH-004",
+        "title": "API key rotation and scope management",
+        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n\n- A key works for some endpoints and not others\n\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n\n- The key was issued with a scope that excludes the endpoint being called\n\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution",
+        "score": 0.2112543483155865
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.015694100060500205
+    "latency_seconds": 0.008438499993644655
   },
   {
     "ticket_id": "VAL-0040",
@@ -1052,26 +780,14 @@
     "reason": "Intent billing_query requires human handling",
     "sources": [
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.27591564927857937
-      },
-      {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.25915775401069524
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.2406267179769104
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.29005564505293135
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018853800022043288
+    "latency_seconds": 0.011266899993643165
   },
   {
     "ticket_id": "VAL-0041",
@@ -1086,26 +802,14 @@
     "reason": "Intent billing_query requires human handling",
     "sources": [
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.27591564927857937
-      },
-      {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.25915775401069524
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.2406267179769104
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.29005564505293135
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01594359998125583
+    "latency_seconds": 0.013288900023326278
   },
   {
     "ticket_id": "VAL-0042",
@@ -1117,23 +821,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.54 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.2956896551724138
-      },
-      {
-        "doc_id": "DOC-DEPLOY-004",
-        "title": "Configuring environment variables and secrets",
-        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n- A secret value appears in plain text in the logs\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n- The application logs its configuration at startup\n- An environment override exists that is not visible on the main settings page\n\n## Resolut",
-        "score": 0.2583333333333333
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.01711509993765503
+    "latency_seconds": 0.01517899997998029
   },
   {
     "ticket_id": "VAL-0043",
@@ -1150,18 +841,12 @@
       {
         "doc_id": "DOC-SEC-001",
         "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.31982600732600736
-      },
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.18660714285714286
+        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n\n- A user reports credentials may have been exposed\n\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n\n- An API key was committed to a public repository\n\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. T",
+        "score": 0.27068392986237694
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01875879999715835
+    "latency_seconds": 0.016764599946327507
   },
   {
     "ticket_id": "VAL-0044",
@@ -1176,38 +861,14 @@
     "reason": "Intent billing_query requires human handling",
     "sources": [
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.31099167822468793
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.2686813186813187
-      },
-      {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.267358803986711
-      },
-      {
-        "doc_id": "DOC-DEPLOY-002",
-        "title": "Rolling back a failed release",
-        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within roug",
-        "score": 0.18516483516483517
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.18348946135831384
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.2636842489171285
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01911250001285225
+    "latency_seconds": 0.01788419997319579
   },
   {
     "ticket_id": "VAL-0045",
@@ -1224,12 +885,12 @@
       {
         "doc_id": "DOC-DATA-001",
         "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.2355383734249714
+        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n\n- The download link has expired\n\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n\n- Download links are valid for twenty-four hours\n\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several ",
+        "score": 0.30013793059869476
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01810810004826635
+    "latency_seconds": 0.017283499939367175
   },
   {
     "ticket_id": "VAL-0046",
@@ -1246,12 +907,12 @@
       {
         "doc_id": "DOC-API-002",
         "title": "Pagination and handling large result sets",
-        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n- Iterating through results misses or duplicates records\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n- Offset pagination was used against a changing collection\n- The page size requested exceeds the maximum\n\n## Resolution\n\n1. Use cursor pagination for anything that may change while you iterate. ",
-        "score": 0.3357632398753894
+        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n\n- Iterating through results misses or duplicates records\n\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n\n- Offset pagination was used against a changing collection\n\n- The page size requested exceeds the maximum\n\n## Resolution",
+        "score": 0.2436165755281249
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01833810005337
+    "latency_seconds": 0.012770800036378205
   },
   {
     "ticket_id": "VAL-0047",
@@ -1263,35 +924,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.27 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.2706685837526959
-      },
-      {
-        "doc_id": "DOC-AUTH-004",
-        "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.22596153846153846
-      },
-      {
-        "doc_id": "DOC-DATA-003",
-        "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.18213399503722086
-      },
-      {
-        "doc_id": "DOC-INT-002",
-        "title": "Third party monitoring and log forwarding",
-        "text": "# Third party monitoring and log forwarding\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Logs are not arriving at the external destination\n- Metrics are delayed compared with the console\n- Forwarded volume is higher than expected\n\n## Common causes\n\n- The destination rejected the payload and forwarding paused\n- Aggregation introduces a delay before metrics are forwarded\n- Debug-level logs are being forwarded along with the rest\n\n## Resolution\n\n1. Check the forwarding status page",
-        "score": 0.18186234817813765
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.01685330003965646
+    "latency_seconds": 0.013342199963517487
   },
   {
     "ticket_id": "VAL-0048",
@@ -1308,18 +944,12 @@
       {
         "doc_id": "DOC-SEC-001",
         "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.25443609022556396
-      },
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.1950239234449761
+        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n\n- A user reports credentials may have been exposed\n\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n\n- An API key was committed to a public repository\n\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. T",
+        "score": 0.18481598056067886
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01943730004131794
+    "latency_seconds": 0.013436799985356629
   },
   {
     "ticket_id": "VAL-0049",
@@ -1331,10 +961,17 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "No relevant documentation passage was retrieved",
-    "sources": [],
+    "reason": "Confidence 0.48 is below threshold 0.80",
+    "sources": [
+      {
+        "doc_id": "DOC-AUTH-004",
+        "title": "API key rotation and scope management",
+        "text": "1. Check the API keys page for the key's status and expiry. Revoked and expired keys are listed with the date and the user who acted.\n2. Review the scopes attached to the key. Read-only keys cannot write, and project-scoped keys cannot reach organisation endpoints.\n3. To rotate without downtime, create the replacement key first, deploy it, confirm traffic has moved, then revoke the old key.\n4. If a key has been exposed publicly, revoke it immediately rather than waiting for the rotation window.\n",
+        "score": 0.21056970273179415
+      }
+    ],
     "guardrails": [],
-    "latency_seconds": 0.0157376000424847
+    "latency_seconds": 0.010953100048936903
   },
   {
     "ticket_id": "VAL-0050",
@@ -1346,23 +983,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.52 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.2740597878495661
-      },
-      {
-        "doc_id": "DOC-ONB-001",
-        "title": "First deployment: a walkthrough",
-        "text": "# First deployment: a walkthrough\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A new user does not know where to begin\n- The first deployment fails for unclear reasons\n\n## Common causes\n\n- Required configuration has not been set\n- The project structure does not match what the build expects\n\n## Resolution\n\n1. Create a project, then a service within it. Resources belong to services and services belong to projects.\n2. Connect a repository or push a container image. The build service detects common pr",
-        "score": 0.1964572192513369
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.01577169995289296
+    "latency_seconds": 0.012923100031912327
   },
   {
     "ticket_id": "VAL-0051",
@@ -1379,12 +1003,18 @@
       {
         "doc_id": "DOC-INT-002",
         "title": "Third party monitoring and log forwarding",
-        "text": "# Third party monitoring and log forwarding\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Logs are not arriving at the external destination\n- Metrics are delayed compared with the console\n- Forwarded volume is higher than expected\n\n## Common causes\n\n- The destination rejected the payload and forwarding paused\n- Aggregation introduces a delay before metrics are forwarded\n- Debug-level logs are being forwarded along with the rest\n\n## Resolution\n\n1. Check the forwarding status page",
-        "score": 0.3368421052631579
+        "text": "1. Check the forwarding status page, which shows the last successful delivery and any error returned by the destination.\n2. Expect a delay of up to two minutes on metrics, since they are aggregated before being sent.\n3. Apply a level filter at source so that debug output is not forwarded, which is usually the reason volume is higher than expected.\n4. Verify the destination credential separately if delivery has stopped entirely, as expired credentials are the most common cause.\n\n## Notes\n\nForward",
+        "score": 0.28138029613976784
+      },
+      {
+        "doc_id": "DOC-INT-002",
+        "title": "Third party monitoring and log forwarding",
+        "text": "# Third party monitoring and log forwarding\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Logs are not arriving at the external destination\n\n- Metrics are delayed compared with the console\n\n- Forwarded volume is higher than expected\n\n## Common causes\n\n- The destination rejected the payload and forwarding paused\n\n- Aggregation introduces a delay before metrics are forwarded\n\n- Debug-level logs are being forwarded along with the rest\n\n## Resolution",
+        "score": 0.26765675936342653
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.016801699995994568
+    "latency_seconds": 0.01385450002271682
   },
   {
     "ticket_id": "VAL-0052",
@@ -1396,41 +1026,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.51 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.4236737400530504
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.3091133004926109
-      },
-      {
-        "doc_id": "DOC-API-003",
-        "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.2510194902548726
-      },
-      {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.24997173544375356
-      },
-      {
-        "doc_id": "DOC-BILL-001",
-        "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.23161488562649368
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.015078700031153858
+    "latency_seconds": 0.014453099924139678
   },
   {
     "ticket_id": "VAL-0053",
@@ -1445,38 +1044,14 @@
     "reason": "Intent billing_query requires human handling",
     "sources": [
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.31099167822468793
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.2686813186813187
-      },
-      {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.267358803986711
-      },
-      {
-        "doc_id": "DOC-DEPLOY-002",
-        "title": "Rolling back a failed release",
-        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within roug",
-        "score": 0.18516483516483517
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.18348946135831384
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.2636842489171285
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.017697300063446164
+    "latency_seconds": 0.013197500025853515
   },
   {
     "ticket_id": "VAL-0054",
@@ -1489,28 +1064,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Intent data_residency requires human handling",
-    "sources": [
-      {
-        "doc_id": "DOC-DATA-003",
-        "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.2765750286368843
-      },
-      {
-        "doc_id": "DOC-DATA-002",
-        "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.27611111111111114
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.20891089108910893
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.018271799897775054
+    "latency_seconds": 0.010188900050707161
   },
   {
     "ticket_id": "VAL-0055",
@@ -1527,12 +1083,18 @@
       {
         "doc_id": "DOC-INT-001",
         "title": "Connecting continuous integration pipelines",
-        "text": "# Connecting continuous integration pipelines\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The pipeline cannot authenticate against CloudServe\n- Deployments succeed manually but fail from the pipeline\n- The pipeline has broader access than intended\n\n## Common causes\n\n- A personal key was used rather than a service account\n- The pipeline environment lacks the configuration present locally\n- The service account was granted an organisation-wide role\n\n## Resolution\n\n1. Create a service account for the",
-        "score": 0.22294117647058823
+        "text": "# Connecting continuous integration pipelines\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The pipeline cannot authenticate against CloudServe\n\n- Deployments succeed manually but fail from the pipeline\n\n- The pipeline has broader access than intended\n\n## Common causes\n\n- A personal key was used rather than a service account\n\n- The pipeline environment lacks the configuration present locally\n\n- The service account was granted an organisation-wide role\n\n## Resolution",
+        "score": 0.2970253796084959
+      },
+      {
+        "doc_id": "DOC-INT-001",
+        "title": "Connecting continuous integration pipelines",
+        "text": "1. Create a service account for the pipeline rather than using a personal key, so that access survives staff changes.\n2. Grant the service account only the projects and permissions the pipeline needs, and review that grant when the pipeline changes.\n3. Store the credential as an encrypted secret in your pipeline provider, never in the repository.\n4. Test the pipeline credential separately from the deployment logic, so that authentication failures are distinguishable from deployment failures.\n\n##",
+        "score": 0.23751964169741907
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.017607799964025617
+    "latency_seconds": 0.014286800054833293
   },
   {
     "ticket_id": "VAL-0056",
@@ -1547,20 +1109,14 @@
     "reason": "Confidence 0.66 is below threshold 0.80",
     "sources": [
       {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.36809523809523814
-      },
-      {
         "doc_id": "DOC-DEPLOY-001",
         "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.27658402203856747
+        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n\n- Logs show repeated health check timeouts\n\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n\n- The container listens on a different port than the service declares\n\n- A required environment variable is absent in the deployed environment\n\n## ",
+        "score": 0.18728980137077547
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.02006390003953129
+    "latency_seconds": 0.014594999956898391
   },
   {
     "ticket_id": "VAL-0057",
@@ -1577,24 +1133,12 @@
       {
         "doc_id": "DOC-DEPLOY-001",
         "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.4452310924369749
-      },
-      {
-        "doc_id": "DOC-DEPLOY-004",
-        "title": "Configuring environment variables and secrets",
-        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n- A secret value appears in plain text in the logs\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n- The application logs its configuration at startup\n- An environment override exists that is not visible on the main settings page\n\n## Resolut",
-        "score": 0.22212121212121214
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.19060810810810813
+        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n\n- Logs show repeated health check timeouts\n\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n\n- The container listens on a different port than the service declares\n\n- A required environment variable is absent in the deployed environment\n\n## ",
+        "score": 0.334186996658159
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018024199991486967
+    "latency_seconds": 0.01010299997869879
   },
   {
     "ticket_id": "VAL-0058",
@@ -1611,18 +1155,12 @@
       {
         "doc_id": "DOC-AUTH-004",
         "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.2440934065934066
-      },
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.2440659340659341
+        "text": "1. Check the API keys page for the key's status and expiry. Revoked and expired keys are listed with the date and the user who acted.\n2. Review the scopes attached to the key. Read-only keys cannot write, and project-scoped keys cannot reach organisation endpoints.\n3. To rotate without downtime, create the replacement key first, deploy it, confirm traffic has moved, then revoke the old key.\n4. If a key has been exposed publicly, revoke it immediately rather than waiting for the rotation window.\n",
+        "score": 0.2081818739917548
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.017562600085511804
+    "latency_seconds": 0.01479829999152571
   },
   {
     "ticket_id": "VAL-0059",
@@ -1639,24 +1177,12 @@
       {
         "doc_id": "DOC-DEPLOY-004",
         "title": "Configuring environment variables and secrets",
-        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n- A secret value appears in plain text in the logs\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n- The application logs its configuration at startup\n- An environment override exists that is not visible on the main settings page\n\n## Resolut",
-        "score": 0.3299771167048055
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.19283314669652857
-      },
-      {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.1896134140661388
+        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n\n- A secret value appears in plain text in the logs\n\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n\n- The application logs its configuration at startup\n\n- An environment override exists that is not visible on the main settings page\n\n## Res",
+        "score": 0.1988530850694709
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018446499947458506
+    "latency_seconds": 0.014262499986216426
   },
   {
     "ticket_id": "VAL-0060",
@@ -1673,12 +1199,18 @@
       {
         "doc_id": "DOC-API-003",
         "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.4777384020618557
+        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n\n- The same event is delivered more than once\n\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n\n- The endpoint responded too slowly and the delivery timed out\n\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution",
+        "score": 0.49251045870351784
+      },
+      {
+        "doc_id": "DOC-API-003",
+        "title": "Webhook delivery, retries and signature verification",
+        "text": "1. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days.\n2. Return 2xx as quickly as possible and process the event asynchronously. Deliveries time out after five seconds.\n3. Compute the signature over the raw request body before any parsing. Re-serialising JSON changes the bytes and invalidates the signature.\n4. Make your handler idempotent using the event identifier. At-least-once delivery means duplicates are expected rather tha",
+        "score": 0.19742993179598733
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018770899972878397
+    "latency_seconds": 0.012201900011859834
   },
   {
     "ticket_id": "VAL-0061",
@@ -1695,12 +1227,18 @@
       {
         "doc_id": "DOC-API-003",
         "title": "Webhook delivery, retries and signature verification",
-        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n- The same event is delivered more than once\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n- The endpoint responded too slowly and the delivery timed out\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution\n\n1. Check the webhook delivery ",
-        "score": 0.4777384020618557
+        "text": "# Webhook delivery, retries and signature verification\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Webhooks are not arriving at the configured endpoint\n\n- The same event is delivered more than once\n\n- Signature verification fails\n\n## Common causes\n\n- The endpoint returned a non-2xx status and delivery is being retried\n\n- The endpoint responded too slowly and the delivery timed out\n\n- The signature was computed over a parsed body rather than the raw bytes\n\n## Resolution",
+        "score": 0.49251045870351784
+      },
+      {
+        "doc_id": "DOC-API-003",
+        "title": "Webhook delivery, retries and signature verification",
+        "text": "1. Check the webhook delivery log, which records every attempt with the response status and body for the last seven days.\n2. Return 2xx as quickly as possible and process the event asynchronously. Deliveries time out after five seconds.\n3. Compute the signature over the raw request body before any parsing. Re-serialising JSON changes the bytes and invalidates the signature.\n4. Make your handler idempotent using the event identifier. At-least-once delivery means duplicates are expected rather tha",
+        "score": 0.19742993179598733
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018493599956855178
+    "latency_seconds": 0.012899500085040927
   },
   {
     "ticket_id": "VAL-0062",
@@ -1717,12 +1255,18 @@
       {
         "doc_id": "DOC-INT-002",
         "title": "Third party monitoring and log forwarding",
-        "text": "# Third party monitoring and log forwarding\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Logs are not arriving at the external destination\n- Metrics are delayed compared with the console\n- Forwarded volume is higher than expected\n\n## Common causes\n\n- The destination rejected the payload and forwarding paused\n- Aggregation introduces a delay before metrics are forwarded\n- Debug-level logs are being forwarded along with the rest\n\n## Resolution\n\n1. Check the forwarding status page",
-        "score": 0.2990070921985816
+        "text": "1. Check the forwarding status page, which shows the last successful delivery and any error returned by the destination.\n2. Expect a delay of up to two minutes on metrics, since they are aggregated before being sent.\n3. Apply a level filter at source so that debug output is not forwarded, which is usually the reason volume is higher than expected.\n4. Verify the destination credential separately if delivery has stopped entirely, as expired credentials are the most common cause.\n\n## Notes\n\nForward",
+        "score": 0.23954151496418846
+      },
+      {
+        "doc_id": "DOC-INT-002",
+        "title": "Third party monitoring and log forwarding",
+        "text": "# Third party monitoring and log forwarding\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Logs are not arriving at the external destination\n\n- Metrics are delayed compared with the console\n\n- Forwarded volume is higher than expected\n\n## Common causes\n\n- The destination rejected the payload and forwarding paused\n\n- Aggregation introduces a delay before metrics are forwarded\n\n- Debug-level logs are being forwarded along with the rest\n\n## Resolution",
+        "score": 0.22510710489978164
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01867600006517023
+    "latency_seconds": 0.015543999965302646
   },
   {
     "ticket_id": "VAL-0063",
@@ -1734,29 +1278,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.58 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-ACCT-001",
-        "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.2635493372606775
-      },
-      {
-        "doc_id": "DOC-AUTH-003",
-        "title": "Single sign-on configuration with SAML providers",
-        "text": "# Single sign-on configuration with SAML providers\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Users are redirected to the identity provider and returned to an error page\n- SSO works for some users and not others\n- New users are not provisioned automatically\n\n## Common causes\n\n- The assertion consumer service URL does not match the value registered with CloudServe\n- The email attribute in the assertion does not match the CloudServe account email\n- Just-in-time provisioning is ",
-        "score": 0.26025974025974025
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.1830357142857143
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.020344700082205236
+    "latency_seconds": 0.010887300013564527
   },
   {
     "ticket_id": "VAL-0064",
@@ -1773,12 +1298,12 @@
       {
         "doc_id": "DOC-API-002",
         "title": "Pagination and handling large result sets",
-        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n- Iterating through results misses or duplicates records\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n- Offset pagination was used against a changing collection\n- The page size requested exceeds the maximum\n\n## Resolution\n\n1. Use cursor pagination for anything that may change while you iterate. ",
-        "score": 0.23198863636363637
+        "text": "# Pagination and handling large result sets\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Only the first page of results is returned\n\n- Iterating through results misses or duplicates records\n\n- Large queries time out\n\n## Common causes\n\n- The cursor from the previous response was not passed to the next request\n\n- Offset pagination was used against a changing collection\n\n- The page size requested exceeds the maximum\n\n## Resolution",
+        "score": 0.1903773801123722
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.019602299900725484
+    "latency_seconds": 0.011777399922721088
   },
   {
     "ticket_id": "VAL-0065",
@@ -1795,36 +1320,18 @@
       {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.41436781609195406
+        "text": "1. Open the usage breakdown for the period, which itemises charges by service and by environment.\n2. Look for resources in staging or development environments, which are billed at the same rate as production.\n3. Check the billing period dates at the top of the invoice. The period runs from the anniversary of the subscription date.\n4. Set a usage alert on the billing page so that unexpected accrual is noticed during the period rather than at the end of it.\n\n## Notes\n\nInvoices are finalised three ",
+        "score": 0.2794207469550223
       },
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.300314465408805
-      },
-      {
-        "doc_id": "DOC-BILL-002",
-        "title": "Changing plans, and how proration is calculated",
-        "text": "# Changing plans, and how proration is calculated\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The charge after an upgrade differs from the advertised price\n- A downgrade did not take effect immediately\n- A credit is expected but not visible\n\n## Common causes\n\n- The upgrade was prorated across the remainder of the billing period\n- Downgrades are applied at the end of the current period rather than immediately\n- The credit was applied to the next invoice rather than refunded\n\n## Resolution\n\n1. Upgr",
-        "score": 0.268241695303551
-      },
-      {
-        "doc_id": "DOC-BILL-003",
-        "title": "Usage limits, overage and spend controls",
-        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n- Overage charges appeared unexpectedly\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n- A spend cap was configured and reached\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution\n\n1. Check the current period usage against the plan allowance on the billin",
-        "score": 0.23434343434343435
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.23333333333333334
+        "doc_id": "DOC-BILL-001",
+        "title": "Understanding your invoice and usage breakdown",
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.26437861806258856
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.021656400058418512
+    "latency_seconds": 0.008998599951155484
   },
   {
     "ticket_id": "VAL-0066",
@@ -1837,28 +1344,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Intent data_residency requires human handling",
-    "sources": [
-      {
-        "doc_id": "DOC-DATA-003",
-        "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.2874587458745875
-      },
-      {
-        "doc_id": "DOC-DATA-002",
-        "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.26089285714285715
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.18341121495327106
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.0286301999585703
+    "latency_seconds": 0.010865100077353418
   },
   {
     "ticket_id": "VAL-0067",
@@ -1875,12 +1363,12 @@
       {
         "doc_id": "DOC-SEC-001",
         "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.2783018867924528
+        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n\n- A user reports credentials may have been exposed\n\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n\n- An API key was committed to a public repository\n\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. T",
+        "score": 0.24275388818079396
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01835260004736483
+    "latency_seconds": 0.011190999997779727
   },
   {
     "ticket_id": "VAL-0068",
@@ -1897,12 +1385,18 @@
       {
         "doc_id": "DOC-SEC-001",
         "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.26752136752136757
+        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n\n- A user reports credentials may have been exposed\n\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n\n- An API key was committed to a public repository\n\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. T",
+        "score": 0.25958583269691504
+      },
+      {
+        "doc_id": "DOC-SEC-003",
+        "title": "Audit logging and compliance evidence",
+        "text": "1. Filter the audit log by actor, resource and date range. Every administrative action carries the user, the address and the outcome.\n2. Export the relevant period to object storage for anything needed beyond the retention window. Exports are not subject to retention limits.\n3. Configure continuous export to your own storage if a policy requires retention longer than the plan provides.\n4. Note that read access to resources is not logged on Business plans, only administrative and configuration ch",
+        "score": 0.18494280884899003
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.018821600009687245
+    "latency_seconds": 0.008139900048263371
   },
   {
     "ticket_id": "VAL-0069",
@@ -1914,23 +1408,10 @@
     "citations": [],
     "escalated": true,
     "blocked": false,
-    "reason": "Confidence 0.54 is below threshold 0.80",
-    "sources": [
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.2956896551724138
-      },
-      {
-        "doc_id": "DOC-DEPLOY-004",
-        "title": "Configuring environment variables and secrets",
-        "text": "# Configuring environment variables and secrets\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- The application cannot read a variable that appears to be set\n- A secret value appears in plain text in the logs\n- Configuration differs between environments unexpectedly\n\n## Common causes\n\n- The variable was set at project scope but read at service scope\n- The application logs its configuration at startup\n- An environment override exists that is not visible on the main settings page\n\n## Resolut",
-        "score": 0.2583333333333333
-      }
-    ],
+    "reason": "No relevant documentation passage was retrieved",
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.01737170002888888
+    "latency_seconds": 0.008084199973382056
   },
   {
     "ticket_id": "VAL-0070",
@@ -1947,12 +1428,12 @@
       {
         "doc_id": "DOC-AUTH-003",
         "title": "Single sign-on configuration with SAML providers",
-        "text": "# Single sign-on configuration with SAML providers\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Users are redirected to the identity provider and returned to an error page\n- SSO works for some users and not others\n- New users are not provisioned automatically\n\n## Common causes\n\n- The assertion consumer service URL does not match the value registered with CloudServe\n- The email attribute in the assertion does not match the CloudServe account email\n- Just-in-time provisioning is ",
-        "score": 0.24264380530973453
+        "text": "# Single sign-on configuration with SAML providers\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Users are redirected to the identity provider and returned to an error page\n\n- SSO works for some users and not others\n\n- New users are not provisioned automatically\n\n## Common causes\n\n- The assertion consumer service URL does not match the value registered with CloudServe\n\n- The email attribute in the assertion does not match the CloudServe account email\n\n- Just-in-time provisioning",
+        "score": 0.2832566057861955
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.015145599958486855
+    "latency_seconds": 0.011984799988567829
   },
   {
     "ticket_id": "VAL-0071",
@@ -1969,30 +1450,18 @@
       {
         "doc_id": "DOC-BILL-003",
         "title": "Usage limits, overage and spend controls",
-        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n- Overage charges appeared unexpectedly\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n- A spend cap was configured and reached\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution\n\n1. Check the current period usage against the plan allowance on the billin",
-        "score": 0.3371177944862156
+        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n\n- Overage charges appeared unexpectedly\n\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n\n- A spend cap was configured and reached\n\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution",
+        "score": 0.45090548670402664
       },
       {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.24285714285714285
-      },
-      {
-        "doc_id": "DOC-DEPLOY-002",
-        "title": "Rolling back a failed release",
-        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within roug",
-        "score": 0.1878497790868925
-      },
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.18660714285714286
+        "doc_id": "DOC-BILL-003",
+        "title": "Usage limits, overage and spend controls",
+        "text": "1. Check the current period usage against the plan allowance on the billing page.\n2. Decide deliberately between a hard spend cap, which stops the service, and overage, which continues at the listed rate. Production workloads generally need the second.\n3. Configure alerts at fifty, eighty and ninety-five per cent of allowance rather than relying on the cap as a warning.\n4. Where a cap has stopped a production service, an account owner can raise it immediately from the billing page and service re",
+        "score": 0.2429769464737795
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.014594699954614043
+    "latency_seconds": 0.01029399991966784
   },
   {
     "ticket_id": "VAL-0072",
@@ -2007,32 +1476,14 @@
     "reason": "Intent billing_query requires human handling",
     "sources": [
       {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.3466628959276018
-      },
-      {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.33139534883720934
-      },
-      {
-        "doc_id": "DOC-DEPLOY-003",
-        "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.27591564927857937
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.20431688804554082
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.3507048526872223
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.013886000029742718
+    "latency_seconds": 0.008018000051379204
   },
   {
     "ticket_id": "VAL-0073",
@@ -2049,18 +1500,12 @@
       {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.267358803986711
-      },
-      {
-        "doc_id": "DOC-BILL-002",
-        "title": "Changing plans, and how proration is calculated",
-        "text": "# Changing plans, and how proration is calculated\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The charge after an upgrade differs from the advertised price\n- A downgrade did not take effect immediately\n- A credit is expected but not visible\n\n## Common causes\n\n- The upgrade was prorated across the remainder of the billing period\n- Downgrades are applied at the end of the current period rather than immediately\n- The credit was applied to the next invoice rather than refunded\n\n## Resolution\n\n1. Upgr",
-        "score": 0.21255760368663595
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.2726617560680866
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.015677699935622513
+    "latency_seconds": 0.01402190001681447
   },
   {
     "ticket_id": "VAL-0074",
@@ -2077,12 +1522,18 @@
       {
         "doc_id": "DOC-ACCT-001",
         "title": "Managing team members, roles and permissions",
-        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n- A departing user needs removing\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n- The invitation was never accepted and the account does not exist\n- A group membership grants broader access than the direct role suggests\n\n## Resolution\n\n1. Check the effective permissio",
-        "score": 0.3466793168880456
+        "text": "1. Check the effective permissions view for the user, which resolves direct roles and group memberships together.\n2. Confirm the invitation was accepted. Pending invitations appear in a separate section and expire after seven days.\n3. Remove a departing user rather than only changing their password, and revoke any API keys they created.\n4. Prefer group membership to direct role assignment, so that access can be reviewed in one place.\n\n## Notes\n\nRemoving the last account owner is not permitted. T",
+        "score": 0.2955371354225693
+      },
+      {
+        "doc_id": "DOC-ACCT-001",
+        "title": "Managing team members, roles and permissions",
+        "text": "# Managing team members, roles and permissions\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A user cannot access a project they should be able to\n\n- A departing user needs removing\n\n- Permissions need narrowing after a review\n\n## Common causes\n\n- The role was granted at project scope rather than organisation scope\n\n- The invitation was never accepted and the account does not exist\n\n- A group membership grants broader access than the direct role suggests\n\n## Resolution",
+        "score": 0.26969546188603344
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.013002999941818416
+    "latency_seconds": 0.008159100078046322
   },
   {
     "ticket_id": "VAL-0075",
@@ -2097,20 +1548,20 @@
     "reason": "Confidence 0.54 is below threshold 0.80",
     "sources": [
       {
-        "doc_id": "DOC-API-001",
-        "title": "Understanding API rate limits and quota tiers",
-        "text": "# Understanding API rate limits and quota tiers\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Requests return 429 Too Many Requests\n- Throughput drops sharply at a predictable point\n- Limits appear lower than the documented figure\n\n## Common causes\n\n- The limit applies per organisation rather than per key\n- Burst capacity was consumed and the sustained rate now applies\n- The endpoint being called has a lower limit than the general one\n\n## Resolution\n\n1. Read the rate limit headers returned with eve",
-        "score": 0.2657894736842105
+        "doc_id": "DOC-AUTH-004",
+        "title": "API key rotation and scope management",
+        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n\n- A key works for some endpoints and not others\n\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n\n- The key was issued with a scope that excludes the endpoint being called\n\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution",
+        "score": 0.24856532196069564
       },
       {
         "doc_id": "DOC-AUTH-004",
         "title": "API key rotation and scope management",
-        "text": "# API key rotation and scope management\n\n**Applies to:** All plans\n\n## Symptoms\n\n- A previously working key returns 401 Unauthorized\n- A key works for some endpoints and not others\n- A key needs replacing after accidental exposure\n\n## Common causes\n\n- The key was revoked or reached its configured expiry\n- The key was issued with a scope that excludes the endpoint being called\n- The key belongs to a deleted user and was removed with the account\n\n## Resolution\n\n1. Check the API keys page for the k",
-        "score": 0.20598744567841623
+        "text": "1. Check the API keys page for the key's status and expiry. Revoked and expired keys are listed with the date and the user who acted.\n2. Review the scopes attached to the key. Read-only keys cannot write, and project-scoped keys cannot reach organisation endpoints.\n3. To rotate without downtime, create the replacement key first, deploy it, confirm traffic has moved, then revoke the old key.\n4. If a key has been exposed publicly, revoke it immediately rather than waiting for the rotation window.\n",
+        "score": 0.20391886659334266
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.01889499998651445
+    "latency_seconds": 0.012849800055846572
   },
   {
     "ticket_id": "VAL-0076",
@@ -2127,36 +1578,12 @@
       {
         "doc_id": "DOC-DATA-003",
         "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.344327485380117
-      },
-      {
-        "doc_id": "DOC-DATA-002",
-        "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.27611111111111114
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.24255555555555558
-      },
-      {
-        "doc_id": "DOC-AUTH-003",
-        "title": "Single sign-on configuration with SAML providers",
-        "text": "# Single sign-on configuration with SAML providers\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- Users are redirected to the identity provider and returned to an error page\n- SSO works for some users and not others\n- New users are not provisioned automatically\n\n## Common causes\n\n- The assertion consumer service URL does not match the value registered with CloudServe\n- The email attribute in the assertion does not match the CloudServe account email\n- Just-in-time provisioning is ",
-        "score": 0.23315494393476047
-      },
-      {
-        "doc_id": "DOC-ACCT-002",
-        "title": "Organisation setup and project structure",
-        "text": "# Organisation setup and project structure\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Resources are difficult to separate for billing\n- Environments are sharing configuration unintentionally\n- A project needs moving between organisations\n\n## Common causes\n\n- Environments were created as folders within one project rather than as separate projects\n- Configuration was set at organisation scope and inherited everywhere\n- Projects cannot move between organisations without a migration\n\n## Resolution\n\n",
-        "score": 0.2110215053763441
+        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n\n- Latency is high for users far from the primary region\n\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n\n- Read traffic is being served from the primary region only\n\n- Backups are replicated to a second region by default\n\n## Resolution",
+        "score": 0.28811342053102534
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.011331200017593801
+    "latency_seconds": 0.011101400014013052
   },
   {
     "ticket_id": "VAL-0077",
@@ -2173,30 +1600,12 @@
       {
         "doc_id": "DOC-BILL-001",
         "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.46737720111214087
-      },
-      {
-        "doc_id": "DOC-BILL-002",
-        "title": "Changing plans, and how proration is calculated",
-        "text": "# Changing plans, and how proration is calculated\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The charge after an upgrade differs from the advertised price\n- A downgrade did not take effect immediately\n- A credit is expected but not visible\n\n## Common causes\n\n- The upgrade was prorated across the remainder of the billing period\n- Downgrades are applied at the end of the current period rather than immediately\n- The credit was applied to the next invoice rather than refunded\n\n## Resolution\n\n1. Upgr",
-        "score": 0.28213399503722086
-      },
-      {
-        "doc_id": "DOC-BILL-003",
-        "title": "Usage limits, overage and spend controls",
-        "text": "# Usage limits, overage and spend controls\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Service was throttled after a traffic increase\n- Overage charges appeared unexpectedly\n- A spend cap stopped a production workload\n\n## Common causes\n\n- Plan allowance was consumed before the end of the period\n- A spend cap was configured and reached\n- Overage protection is disabled, so usage continued beyond the allowance\n\n## Resolution\n\n1. Check the current period usage against the plan allowance on the billin",
-        "score": 0.23639676113360328
-      },
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.18088125466766244
+        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n\n- Charges appear for a service that is not in use\n\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n\n- A resource was left running in a non-production environment\n\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution",
+        "score": 0.3193453882906622
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.012596299988217652
+    "latency_seconds": 0.0114718999247998
   },
   {
     "ticket_id": "VAL-0078",
@@ -2211,38 +1620,14 @@
     "reason": "Confidence 0.34 is below threshold 0.80",
     "sources": [
       {
-        "doc_id": "DOC-PERF-003",
-        "title": "Database connection pool exhaustion",
-        "text": "# Database connection pool exhaustion\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Errors indicating no connection is available\n- Latency increases sharply as traffic grows\n- The database reports far fewer active queries than the application expects\n\n## Common causes\n\n- The pool size multiplied by the instance count exceeds the database connection limit\n- Connections are not being returned to the pool after use\n- Long-running transactions are holding connections open\n\n## Resolution\n\n1. Calc",
-        "score": 0.30533088235294115
-      },
-      {
-        "doc_id": "DOC-DEPLOY-001",
-        "title": "Container deployments failing during the health check phase",
-        "text": "# Container deployments failing during the health check phase\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The deployment reaches running and then rolls back\n- Logs show repeated health check timeouts\n- The service works locally but not when deployed\n\n## Common causes\n\n- The health endpoint takes longer to respond than the configured timeout\n- The container listens on a different port than the service declares\n- A required environment variable is absent in the deployed environment\n\n## Reso",
-        "score": 0.29364669421487605
-      },
-      {
         "doc_id": "DOC-DATA-002",
         "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.25899621212121215
-      },
-      {
-        "doc_id": "DOC-DEPLOY-002",
-        "title": "Rolling back a failed release",
-        "text": "# Rolling back a failed release\n\n**Applies to:** Container Service, Functions\n\n## Symptoms\n\n- A release has introduced errors and must be reverted\n- The previous revision is needed while a fix is prepared\n\n## Common causes\n\n- A defect reached production that testing did not catch\n- A configuration change had unintended effects\n\n## Resolution\n\n1. Open the revisions page for the service and identify the last revision that was healthy.\n2. Select roll back on that revision. Traffic moves within roug",
-        "score": 0.2506868131868132
-      },
-      {
-        "doc_id": "DOC-PERF-002",
-        "title": "Autoscaling behaviour and instance limits",
-        "text": "# Autoscaling behaviour and instance limits\n\n**Applies to:** Container Service\n\n## Symptoms\n\n- The service does not scale up under load\n- Scaling happens later than expected\n- Instance count oscillates\n\n## Common causes\n\n- The maximum instance count has been reached\n- The scaling metric responds more slowly than the load changes\n- The cooldown period is shorter than the time a new instance takes to become ready\n\n## Resolution\n\n1. Check whether the service is sitting at its configured maximum. Sc",
-        "score": 0.24882075471698115
+        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n\n- A restore is taking longer than expected\n\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n\n- Restore time scales with database size\n\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution",
+        "score": 0.18517473347865981
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.011059800046496093
+    "latency_seconds": 0.00883940001949668
   },
   {
     "ticket_id": "VAL-0079",
@@ -2255,28 +1640,9 @@
     "escalated": true,
     "blocked": false,
     "reason": "Intent data_residency requires human handling",
-    "sources": [
-      {
-        "doc_id": "DOC-DATA-003",
-        "title": "Data residency and regional storage",
-        "text": "# Data residency and regional storage\n\n**Applies to:** Business and Enterprise plans\n\n## Symptoms\n\n- A customer requires data to remain in a specific region\n- Latency is high for users far from the primary region\n- A compliance review has asked where data is held\n\n## Common causes\n\n- The organisation was created in a region that no longer suits the requirement\n- Read traffic is being served from the primary region only\n- Backups are replicated to a second region by default\n\n## Resolution\n\n1. Che",
-        "score": 0.26782178217821784
-      },
-      {
-        "doc_id": "DOC-DATA-002",
-        "title": "Backups, retention and point-in-time restore",
-        "text": "# Backups, retention and point-in-time restore\n\n**Applies to:** Managed Database\n\n## Symptoms\n\n- Data was deleted and needs recovering\n- A restore is taking longer than expected\n- A backup is older than expected\n\n## Common causes\n\n- Automated backups run daily and retention depends on the plan\n- Restore time scales with database size\n- Point-in-time recovery is available only where continuous archiving is enabled\n\n## Resolution\n\n1. Identify the point you need to restore to. Point-in-time recover",
-        "score": 0.2673076923076923
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.21360248447204971
-      }
-    ],
+    "sources": [],
     "guardrails": [],
-    "latency_seconds": 0.012135000084526837
+    "latency_seconds": 0.009693200001493096
   },
   {
     "ticket_id": "VAL-0080",
@@ -2291,37 +1657,13 @@
     "reason": "Confidence 0.37 is below threshold 0.80",
     "sources": [
       {
-        "doc_id": "DOC-SEC-001",
-        "title": "Responding to a suspected account compromise",
-        "text": "# Responding to a suspected account compromise\n\n**Applies to:** All plans\n\n## Symptoms\n\n- Unrecognised activity appears in the audit log\n- A user reports credentials may have been exposed\n- Resources were created that nobody claims\n\n## Common causes\n\n- Credentials were reused from a service that suffered a breach\n- An API key was committed to a public repository\n- A former team member retained access after leaving\n\n## Resolution\n\n1. Revoke all API keys for the affected account immediately. This ",
-        "score": 0.2736566186107471
-      },
-      {
-        "doc_id": "DOC-PERF-001",
-        "title": "Diagnosing elevated response latency",
-        "text": "# Diagnosing elevated response latency\n\n**Applies to:** All compute services\n\n## Symptoms\n\n- Response times have increased without a code change\n- The 95th percentile is far above the median\n- Latency rises at predictable times of day\n\n## Common causes\n\n- The service is running close to its memory limit and spending time in garbage collection\n- A downstream dependency has slowed and the delay is propagating\n- Instance count is not scaling with the load pattern\n\n## Resolution\n\n1. Compare median a",
-        "score": 0.2720188902007084
-      },
-      {
-        "doc_id": "DOC-BILL-001",
-        "title": "Understanding your invoice and usage breakdown",
-        "text": "# Understanding your invoice and usage breakdown\n\n**Applies to:** All plans\n\n## Symptoms\n\n- The invoice is higher than expected\n- Charges appear for a service that is not in use\n- The billing period does not align with the calendar month\n\n## Common causes\n\n- Usage-based charges accrued beyond the plan allowance\n- A resource was left running in a non-production environment\n- The billing period runs from the subscription date rather than the first of the month\n\n## Resolution\n\n1. Open the usage bre",
-        "score": 0.2469098277608916
-      },
-      {
         "doc_id": "DOC-DEPLOY-003",
         "title": "Build failures caused by dependency resolution",
-        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n- The build works locally but fails in the pipeline\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n- The build environment uses a different language runtime than the local machine\n- The dependency cache holds a partially written artefact\n\n## Resolution\n\n1.",
-        "score": 0.24623943035157989
-      },
-      {
-        "doc_id": "DOC-DATA-001",
-        "title": "Exporting account data and scheduled extracts",
-        "text": "# Exporting account data and scheduled extracts\n\n**Applies to:** All plans\n\n## Symptoms\n\n- An export has not completed\n- The download link has expired\n- The export is missing recent records\n\n## Common causes\n\n- Large exports are queued and processed asynchronously\n- Download links are valid for twenty-four hours\n- The export captured a snapshot taken when the job started\n\n## Resolution\n\n1. Check the exports page for job status. Jobs covering more than a million records commonly take several minu",
-        "score": 0.24565826330532214
+        "text": "# Build failures caused by dependency resolution\n\n**Applies to:** Build Service\n\n## Symptoms\n\n- Builds that previously succeeded now fail without code changes\n\n- The build works locally but fails in the pipeline\n\n- Dependency resolution takes far longer than usual\n\n## Common causes\n\n- An unpinned dependency released a new incompatible version\n\n- The build environment uses a different language runtime than the local machine\n\n- The dependency cache holds a partially written artefact\n\n## Resolution",
+        "score": 0.2214047044750503
       }
     ],
     "guardrails": [],
-    "latency_seconds": 0.011813999968580902
+    "latency_seconds": 0.01203510002233088
   }
 ]

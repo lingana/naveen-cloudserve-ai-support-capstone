@@ -1,0 +1,81 @@
+{
+  "sample": "development held-out split",
+  "development_tickets": 500,
+  "test_tickets": 125,
+  "overall_accuracy": 1.0,
+  "calibration": [
+    {
+      "band": "0.00-0.20",
+      "count": 8,
+      "stated_confidence": 0.1435,
+      "observed_accuracy": 1.0,
+      "calibration_error": -0.8565
+    },
+    {
+      "band": "0.20-0.40",
+      "count": 41,
+      "stated_confidence": 0.3016,
+      "observed_accuracy": 1.0,
+      "calibration_error": -0.6984
+    },
+    {
+      "band": "0.40-0.60",
+      "count": 70,
+      "stated_confidence": 0.5026,
+      "observed_accuracy": 1.0,
+      "calibration_error": -0.4974
+    },
+    {
+      "band": "0.60-0.80",
+      "count": 6,
+      "stated_confidence": 0.6324,
+      "observed_accuracy": 1.0,
+      "calibration_error": -0.3676
+    }
+  ],
+  "routing_thresholds": [
+    {
+      "threshold": 0.3,
+      "answered": 97,
+      "answered_correctly": 97,
+      "answer_precision": 1.0,
+      "escalated": 28
+    },
+    {
+      "threshold": 0.4,
+      "answered": 76,
+      "answered_correctly": 76,
+      "answer_precision": 1.0,
+      "escalated": 49
+    },
+    {
+      "threshold": 0.5,
+      "answered": 41,
+      "answered_correctly": 41,
+      "answer_precision": 1.0,
+      "escalated": 84
+    },
+    {
+      "threshold": 0.6,
+      "answered": 6,
+      "answered_correctly": 6,
+      "answer_precision": 1.0,
+      "escalated": 119
+    },
+    {
+      "threshold": 0.7,
+      "answered": 0,
+      "answered_correctly": 0,
+      "answer_precision": 0.0,
+      "escalated": 125
+    },
+    {
+      "threshold": 0.8,
+      "answered": 0,
+      "answered_correctly": 0,
+      "answer_precision": 0.0,
+      "escalated": 125
+    }
+  ],
+  "note": "Thresholds are for development holdout analysis only; validation and hidden sets must not be used to tune the classifier repeatedly."
+}

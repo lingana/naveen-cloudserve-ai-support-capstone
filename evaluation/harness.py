@@ -61,6 +61,11 @@ def run(input_path: str, output_path: str):
     sorted_latency = sorted(latencies)
     p95 = sorted_latency[min(len(sorted_latency)-1, int(0.95 * len(sorted_latency)))] if sorted_latency else 0.0
 
+    calibration_path = ROOT / "evaluation" / "results" / "calibration.json"
+    calibration_status = "not_run"
+    if calibration_path.exists():
+        calibration_status = "held-out development calibration report available"
+
     metrics = {
         "volume": {"tickets_processed": len(results), "answered": actions.get("answer", 0),
                    "escalated": escalated, "blocked": blocked},
@@ -75,7 +80,14 @@ def run(input_path: str, output_path: str):
                       "retrieval_hit_rate": round(sum(bool(r["sources"]) for r in results) / len(results), 4) if results else 0.0},
         "governance": {"decision_log_records": pipeline.store.count(),
                        "guardrail_activations": dict(Counter(g for r in results for g in r["guardrails"])),
-                       "private_data_detections": sum("private_data" in r["guardrails"] for r in results)},
+                       "private_data_detections": sum("private_data" in r["guardrails"] for r in results),
+                       "confidence_calibration": calibration_status,
+                       "hidden_set_evaluated": False,
+                       "human_citation_review_completed": False,
+                       "human_hallucination_review_completed": False,
+                       "minimum_human_review_samples": 50,
+                       "minimum_independent_assessors": 2},
+        "calibration": {"status": calibration_status},
     }
 
     (output_path / "ticket_results.json").write_text(json.dumps(results, indent=2), encoding="utf-8")

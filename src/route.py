@@ -3,7 +3,7 @@ from dataclasses import asdict
 HARD_ESCALATE = {"security_incident", "compliance_request", "feature_request", "unclear_request", "data_residency", "billing_query"}
 
 class Router:
-    def __init__(self, threshold: float = 0.80):
+    def __init__(self, threshold: float = 0.30):
         self.threshold = threshold
 
     def route(self, classification: dict, passages: list, ticket_labels: dict = None):
